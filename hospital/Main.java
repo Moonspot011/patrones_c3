@@ -1,6 +1,9 @@
 package hospital;
 
 import hospital.builder.BuilderHCCita;
+import hospital.chain_of_responsibility.Especialista;
+import hospital.chain_of_responsibility.MedicoGeneral;
+import hospital.chain_of_responsibility.UCI;
 import hospital.facade.HospitalFacade;
 import hospital.composite.Departamento;
 import hospital.composite.Cardiologo;
@@ -118,5 +121,20 @@ public class Main {
         System.out.println("Estado restaurado (Memento): " + hc.getEstado() + "\n");
 
         System.out.println("=== PRUEBAS COMPLETADAS ===");
+
+        // 7.Prueba de chain of responsability
+        MedicoGeneral general=new MedicoGeneral();
+        Especialista especialista=new Especialista();
+        UCI uci=new UCI();
+
+        general.setSiguiente(especialista);
+        especialista.setSiguiente(uci);
+
+        Paciente p=new Paciente();
+        p.setField("Carlos");
+        p.setnivel(9);
+
+        general.atender(p);
+        
     }
 }
